@@ -60,6 +60,8 @@ export default defineConfig(({ mode, isSsrBuild }) => {
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "./src"),
+        clsx: "cn",
+        "tailwind-merge": "cn",
       },
     },
 
@@ -140,7 +142,12 @@ export default defineConfig(({ mode, isSsrBuild }) => {
                 return "vendor-fuse";
               }
 
-              if (normalizedId.includes("tailwind-merge") || normalizedId.includes("clsx")) {
+              if (
+                normalizedId.includes("tailwind-merge") ||
+                normalizedId.includes("clsx") ||
+                normalizedId.includes("/cn/") ||
+                normalizedId.includes("cnfast")
+              ) {
                 return "vendor-utils";
               }
 
