@@ -1,0 +1,19 @@
+minimumReleaseAge: 10080 # 7 days
+minimumReleaseAgeExclude:
+  - typescript
+
+trustPolicy: no-downgrade # blocks installs when a package's trust evidence gets weaker than earlier publishes
+trustPolicyExclude:
+  - semver
+  - react-redux
+  - reselect
+blockExoticSubdeps: true # blocks transitive dependencies from pulling code from exotic sources like git repos or direct tarball URLs
+allowBuilds:
+  esbuild: true # required by Vite + Wrangler (Oxide)
+  workerd: true # required to run Wrangler Pages/Workers locally
+
+# Project-level equivalent:
+# pnpm config set --location=project minimumReleaseAge 10080
+#
+# Global equivalent:
+# pnpm config set minimumReleaseAge 10080 --global

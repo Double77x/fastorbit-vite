@@ -1,0 +1,24 @@
+{
+  "name": "Fast Orbit | TanStack Start Starter",
+  "short_name": "Fast Orbit",
+  "description": "A TanStack Start SSG starter on Cloudflare Pages — type-safe, fast and free to clone.",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#ea76cb",
+  "background_color": "#1e1e2e",
+  "display": "standalone",
+  "orientation": "any"
+}

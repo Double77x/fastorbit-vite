@@ -1,0 +1,380 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Poppins", "Poppins Fallback", sans-serif;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-glow: var(--glow);
+
+  /* Vercel-inspired surface tiers */
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-fade-in-right: fade-in-right 0.6s ease-out both;
+  --animate-pulse-glow: pulseGlow 2s infinite;
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in-right {
+    0% {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes pulseGlow {
+    0% {
+      box-shadow: 0 0 0 0 var(--glow);
+    }
+    70% {
+      box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+}
+
+/* Vercel-inspired (Light) — catppuccin pink */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --card: #ffffff;
+  --card-foreground: #171717;
+
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+
+  --primary: #ea76cb; /* Catppuccin Latte pink */
+  --primary-foreground: #ffffff;
+
+  --secondary: #fafafa;
+  --secondary-foreground: #171717;
+
+  --muted: #f5f5f5;
+  --muted-foreground: #666666;
+
+  --accent: #f5f5f5;
+  --accent-foreground: #171717;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: #d7d7d7;
+  --input: #d7d7d7;
+  --ring: #ea76cb;
+
+  /* Alpha border tiers for shadow-based borders (Vercel style) */
+  --border-strong: rgba(0, 0, 0, 0.32);
+
+  --glow: rgba(234, 118, 203, 0.28);
+
+  /* Surface tiers (get darker as you go "deeper") */
+  --surface-1: #ffffff;
+  --surface-2: #fafafa;
+  --surface-3: #f5f5f5;
+
+  /* Grid guide + corner marker colours (very faint, Vercel zone aesthetic) */
+  --grid-guide: rgba(0, 0, 0, 0.06);
+  --grid-plus: var(--border-strong);
+  --grid-cols: 12;
+  --grid-gap: 1.5rem;
+
+  --radius: 0.375rem;
+
+  /* JS-set variables — defined here for fallow health (used via style props) */
+  --accordion-panel-height: 0px;
+  --svg-bg: transparent;
+  --svg-fill: #000000;
+}
+
+/* Catppuccin Mocha (Dark) with pink accent */
+.dark {
+  --background: #1e1e2e; /* base */
+  --foreground: #cdd6f4; /* text */
+
+  --card: #181825; /* mantle */
+  --card-foreground: #cdd6f4; /* text */
+
+  --popover: #181825; /* mantle */
+  --popover-foreground: #cdd6f4; /* text */
+
+  --primary: #f5c2e7; /* pink */
+  --primary-foreground: #1e1e2e; /* base */
+
+  --secondary: #313244; /* surface0 */
+  --secondary-foreground: #cdd6f4; /* text */
+
+  --muted: #313244; /* surface0 */
+  --muted-foreground: #a6adc8; /* subtext0 */
+
+  --accent: #313244; /* surface0 */
+  --accent-foreground: #cdd6f4; /* text */
+
+  --destructive: #f38ba8; /* red */
+  --destructive-foreground: #1e1e2e; /* base */
+
+  --border: #45475a; /* surface1 */
+  --input: #45475a; /* surface1 */
+  --ring: #f5c2e7; /* pink */
+
+  /* Alpha border tiers for shadow-based borders (Vercel style) */
+  --border-strong: rgba(205, 214, 244, 0.28);
+
+  --glow: rgba(245, 194, 231, 0.26);
+
+  /* Surface tiers (get lighter as you go "deeper") */
+  --surface-1: #1e1e2e; /* base */
+  --surface-2: #181825; /* mantle */
+  --surface-3: #313244; /* surface0 */
+
+  /* Grid guide + corner marker colours (very faint, Vercel zone aesthetic) */
+  --grid-guide: rgba(205, 214, 244, 0.05);
+  --grid-plus: var(--border-strong);
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html,
+  body {
+    font-family: var(--font-sans);
+    @apply bg-background text-foreground;
+  }
+  /* Vercel-style tighter heading tracking */
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.02em;
+  }
+  /* Only apply smooth scrolling and gutter on devices with a mouse/trackpad */
+  @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+    html {
+      scroll-behavior: smooth;
+      scrollbar-gutter: stable;
+    }
+  }
+  button {
+    @apply cursor-pointer;
+  }
+
+  /* Optional: Fix disabled buttons showing a pointer */
+  button:disabled {
+    @apply cursor-not-allowed;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 10px;
+    border: 2px solid var(--background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+}
+
+/* Component Utilities */
+@layer components {
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8;
+  }
+
+  /* Vercel-inspired hairline borders (box-shadow, not border) */
+  .border-hairline {
+    box-shadow: 0 0 0 1px var(--border);
+  }
+
+  .border-hairline-strong {
+    box-shadow: 0 0 0 1px var(--border-strong);
+  }
+
+  .border-hairline-inset {
+    box-shadow: inset 0 0 0 1px var(--border);
+  }
+
+  /* Horizontal divider rendered as a shadow (Vercel style) */
+  .divider-hairline {
+    box-shadow: 0 1px 0 0 var(--border);
+  }
+
+  /* Vertical column guide lines (drawn as a repeating gradient).
+     Applied directly to the content-grid container with `content-box` origin
+     so the guide lines land exactly on the grid column boundaries (aligning
+     with the visible columns and the "+" markers). */
+  .grid-zone {
+    position: relative;
+  }
+
+  .grid-zone__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Absolute guide layer that pins to the content gutters so guides
+     extend the full section height and the trailing line lands exactly
+     at the content edge (right "+"). Avoids the stray-repeat line that
+     appears when the repeating tile is painted on the padded container. */
+  .grid-guides-layer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to right, var(--grid-guide, var(--border)) 1px, transparent 1px);
+    background-repeat: repeat;
+    background-size: calc(
+        (100% - (var(--grid-cols, 12) - 1) * var(--grid-gap, 1.5rem)) / var(--grid-cols, 12) + var(--grid-gap, 1.5rem)
+      )
+      100%;
+    border-right: 1px solid var(--grid-guide, var(--border));
+  }
+
+  /* Vercel-style "+" corner marker. Placed at a 0x0 anchor point so the cross
+     is centered exactly on the anchor (the first/last vertical guide line and
+     the section edge). */
+  .grid-plus {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    color: var(--grid-plus, var(--border-strong));
+    z-index: 2;
+  }
+  .grid-plus::before,
+  .grid-plus::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+  }
+  .grid-plus::before {
+    left: 0;
+    top: -9px;
+    bottom: -9px;
+    width: 1px;
+  }
+  .grid-plus::after {
+    top: 0;
+    left: -9px;
+    right: -9px;
+    height: 1px;
+  }
+}
+
+/* Base UI Accordion Panel – height + fade animation */
+.accordion-panel {
+  overflow: hidden;
+  height: var(--accordion-panel-height, 0px);
+  opacity: 1;
+  transition:
+    height 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+    opacity 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+}
+.accordion-panel[data-starting-style],
+.accordion-panel[data-ending-style] {
+  height: 0;
+  opacity: 0;
+}
+
+/* TanStack chart tooltip theming (light/dark aware via app tokens) */
+.chart-tooltip {
+  --ts-chart-tooltip-background: var(--popover);
+  --ts-chart-tooltip-color: var(--popover-foreground);
+  --ts-chart-tooltip-border: 1px solid var(--border);
+  --ts-chart-tooltip-border-radius: var(--radius);
+  --ts-chart-tooltip-shadow: 0 8px 28px rgb(0 0 0 / 0.16);
+  --ts-chart-tooltip-font: 500 0.75rem/1.35 "Poppins", system-ui, sans-serif;
+  --ts-chart-tooltip-padding: 0.5rem 0.65rem;
+  --ts-chart-tooltip-max-width: min(22rem, 82%);
+  z-index: 50;
+}
+
+/* fallow-ignore-next-line css-dead-surface */
+.chart-tooltip .ts-chart-tooltip__title {
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+/* fallow-ignore-next-line css-dead-surface */
+.chart-tooltip .ts-chart-tooltip__row {
+  padding-block: 0.1rem;
+}
+
+/* fallow-ignore-next-line css-dead-surface */
+.chart-tooltip .ts-chart-tooltip__swatch {
+  border-radius: 0.2rem;
+}
+
+.chart-tooltip .ts-chart-tooltip__row span:last-child {
+  font-weight: 600;
+  color: var(--popover-foreground);
+}
+
+@utility rounded-inherit {
+  border-radius: inherit;
+}

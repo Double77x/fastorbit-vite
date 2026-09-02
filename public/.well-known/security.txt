@@ -1,0 +1,6 @@
+Contact: mailto:security@danread.gq
+Expires: 2027-08-31T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://fastorbit.danread.gq/.well-known/security.txt
+Policy: https://fastorbit.danread.gq/legal/security
+# Acknowledgments: https://fastorbit.danread.gq/legal/security

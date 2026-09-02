@@ -1,0 +1,27 @@
+# Fast Orbit
+
+> Fast Orbit is a TanStack Start SSG starter on Cloudflare Pages — file-based routing, cached server state, charts, tables and virtualized lists. Type-safe with Zod, Base UI and Tailwind. Clone and ship.
+
+Built with React 19, Vite, TanStack Router/Start/Query/Table/Virtual/Charts/Hotkeys. Source at [github.com/Double77x/fastorbit-vite](https://github.com/Double77x/fastorbit-vite). Fast Orbit is SSG — every route prerenders to static HTML.
+
+For agents working on the Fast Orbit codebase, read the guidance files below before making changes — they encode the project's strict logic, performance, accessibility and styling conventions.
+
+## Documentation
+
+- [CODING_STANDARDS.md](https://raw.githubusercontent.com/Double77x/fastorbit-vite/main/docs/CODING_STANDARDS.md): Strict logic, performance, accessibility and linting rules. Read first.
+- [ARCHITECTURE.md](https://raw.githubusercontent.com/Double77x/fastorbit-vite/main/docs/ARCHITECTURE.md): High-level system design and data flow.
+- [STYLE_GUIDE.md](https://raw.githubusercontent.com/Double77x/fastorbit-vite/main/docs/STYLE_GUIDE.md): Visual tokens, themes and animation patterns.
+- [TECH_STACK.md](https://raw.githubusercontent.com/Double77x/fastorbit-vite/main/docs/TECH_STACK.md): Complete list of libraries and versions.
+- [ROADMAP.md](https://raw.githubusercontent.com/Double77x/fastorbit-vite/main/docs/ROADMAP.md): Planned features and direction.
+
+## Tools
+
+- [Live Weather Demo](https://fastorbit.danread.gq/#weather): TanStack Query + Charts + Table + Virtual with Open-Meteo.
+- [Quick Start](https://fastorbit.danread.gq/#quick-start): Clone, install and ship in 30 seconds.
+
+## Optional
+
+- [GitHub repository](https://github.com/Double77x/fastorbit-vite): Source code and issues.
+- [Privacy Policy](https://fastorbit.danread.gq/legal/privacy): How user data is handled.
+- [Terms of Service](https://fastorbit.danread.gq/legal/terms): Terms of use.
+- [Changelog](https://fastorbit.danread.gq/legal/changelog): Release history.
