@@ -2,6 +2,8 @@
 
 Live demo: **https://fastorbit.danread.gq** — prerendered on Cloudflare Pages, hydrated on the client.
 
+![1788351680096](image/README/1788351680096.png)
+
 A TanStack Start starter that ships as static HTML from Cloudflare Pages. Type-safe routing, cached server state, charts, tables and virtualized lists — all wired with Base UI and Tailwind. Clone it and start building.
 
 ## What you get
@@ -132,7 +134,6 @@ Use the Bug report template for bugs and include steps to reproduce, what you ex
    npx fallow audit --format json --quiet 2>/dev/null
    pnpm test:unit
    ```
-
 3. Add tests for new hooks or anything in `src/lib`. Pure functions are the easiest to cover. If you add a stack item, update `src/components/landing/StackSection.tsx` so its badge stays in sync.
 4. Update docs when you touch architecture, tokens or routing, and keep `AGENTS.md` aligned.
 5. Push and open a PR against `main`. Describe what changed and why, how you tested it, and add screenshots for UI work. Link the issue if there is one.
