@@ -79,7 +79,7 @@ describe("useWeather", () => {
     expect(mockFetchWeather).toHaveBeenCalledWith(48.85, 2.35);
   });
 
-  it("respects enabled:false", async () => {
+  it("respects enabled:false", () => {
     const { Wrapper } = createWrapper();
     const { result } = renderHook(() => useWeather(london, { enabled: false }), { wrapper: Wrapper });
 

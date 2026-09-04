@@ -15,9 +15,9 @@ const validResponse = {
   daily: {
     time: ["2026-09-02", "2026-09-03"],
     temperature_2m_max: [20.1, 21.5],
-    temperature_2m_min: [12.3, 13.0],
+    temperature_2m_min: [12.3, 13],
     precipitation_sum: [0, 2.5],
-    wind_speed_10m_max: [15.0, 18.2],
+    wind_speed_10m_max: [15, 18.2],
   },
   daily_units: {
     temperature_2m_max: "°C",
@@ -59,7 +59,7 @@ describe("fetchWeather", () => {
       ok: true,
       status: 200,
       statusText: "OK",
-      json: async () => validResponse,
+      json: () => Promise.resolve(validResponse),
     } as Response);
 
     const data = await fetchWeather(51.5, -0.12);
@@ -78,7 +78,7 @@ describe("fetchWeather", () => {
       max: 20.1,
       min: 12.3,
       precipitation: 0,
-      windMax: 15.0,
+      windMax: 15,
     });
     expect(data.units).toEqual({ temp: "°C", precipitation: "mm", wind: "km/h" });
 
@@ -98,7 +98,7 @@ describe("fetchWeather", () => {
       ok: true,
       status: 200,
       statusText: "OK",
-      json: async () => minimal,
+      json: () => Promise.resolve(minimal),
     } as Response);
 
     const data = await fetchWeather(0, 0);
@@ -112,7 +112,7 @@ describe("fetchWeather", () => {
       ok: false,
       status: 500,
       statusText: "Server Error",
-      json: async () => ({}),
+      json: () => Promise.resolve({}),
     } as Response);
 
     await expect(fetchWeather(0, 0)).rejects.toThrow("Open-Meteo HTTP 500");
@@ -123,7 +123,7 @@ describe("fetchWeather", () => {
       ok: true,
       status: 200,
       statusText: "OK",
-      json: async () => ({ invalid: true }),
+      json: () => Promise.resolve({ invalid: true }),
     } as Response);
 
     await expect(fetchWeather(0, 0)).rejects.toThrow();
@@ -144,7 +144,7 @@ describe("fetchWeather", () => {
       ok: true,
       status: 200,
       statusText: "OK",
-      json: async () => withNulls,
+      json: () => Promise.resolve(withNulls),
     } as Response);
 
     const data = await fetchWeather(0, 0);

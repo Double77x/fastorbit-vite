@@ -12,6 +12,7 @@ dist-ssr
 build
 out
 coverage
+.vitest
 bundle-analysis*.html
 .tanstack
 

@@ -2,6 +2,12 @@ minimumReleaseAge: 10080 # 7 days
 minimumReleaseAgeExclude:
   - typescript
   - cn
+  # TEMPORARY (2026-09-04): allow Vitest 5.0.0 (published 2026-09-03) before it
+  # clears the 7-day maturity window (~2026-09-11). Remove after `pnpm install`
+  # succeeds without these entries.
+  - vitest
+  - "@vitest/*"
+  - tinybench
 
 trustPolicy: no-downgrade # blocks installs when a package's trust evidence gets weaker than earlier publishes
 trustPolicyExclude:
