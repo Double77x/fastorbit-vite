@@ -36,7 +36,7 @@
     "react-dom": "^19.2.8",
     "sonner": "^2.0.8",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^4.4.3"
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
