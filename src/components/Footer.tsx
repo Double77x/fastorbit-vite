@@ -89,8 +89,7 @@ const Footer = () => {
             © {year} {siteConfig.name}. All rights reserved.
           </p>
           <p className='flex items-center gap-2 text-xs text-muted-foreground'>
-            <span className='size-2 rounded-full bg-primary' aria-hidden />
-            All systems operational
+            Built By ❤️ Dan
           </p>
         </div>
       </div>
