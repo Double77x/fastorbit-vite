@@ -88,9 +88,7 @@ const Footer = () => {
           <p className='text-xs text-muted-foreground'>
             © {year} {siteConfig.name}. All rights reserved.
           </p>
-          <p className='flex items-center gap-2 text-xs text-muted-foreground'>
-            Built By ❤️ Dan
-          </p>
+          <p className='flex items-center gap-2 text-xs text-muted-foreground'>Built By ❤️ Dan</p>
         </div>
       </div>
     </footer>

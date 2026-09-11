@@ -34,6 +34,9 @@ Graphite is a high-performance data visualization toolkit powered by **TanStack 
   - SSG prerender crawls and produces static `.html` files for all 11 routes during `pnpm build`.
 - **Catch-All 404 (`src/routes/$.tsx`):**
   - Handles unmatched client routes cleanly.
+- **HTML cache control (`scripts/append-html-headers.js`):**
+  - Pages `_headers` rules match the request path, not the file on disk, so a prerendered `legal/terms.html` served at clean URL `/legal/terms` needs its own explicit entry (`/*.html` would never match).
+  - `postbuild` scans `dist/client/**/*.html` and appends per-route `Cache-Control: public, max-age=0, must-revalidate` to the built `_headers`. HTML is tiny (~35–92KB) so revalidation is cheap; large hashed JS/CSS in `/assets/*` keeps 1-year `immutable`. Never hand-edit the generated block.
 
 ## 3. Data Flow & Security
 

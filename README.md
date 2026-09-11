@@ -92,18 +92,37 @@ public/
   _headers     CSP (allows api.open-meteo.com + higgs images), cache for /assets
   _redirects   SPA fallback for unknown routes
   sitemap.xml  generated via scripts/generate-sitemap.js
+scripts/
+  generate-sitemap.js      route discovery → public/sitemap.xml
+  append-html-headers.js   postbuild: per-route HTML no-cache → dist/client/_headers
 ```
 
 ## Deploy
 
-Cloudflare Pages expects `dist/`:
+Cloudflare Pages serves `dist/client` (`pages_build_output_dir` in `wrangler.toml`):
 
 ```bash
 pnpm build
-wrangler pages deploy dist
+wrangler pages deploy dist/client
 ```
 
-`wrangler.toml` sets `pages_build_output_dir = "./dist"`. `_headers` sets 1-year immutable for `/assets/*` and `/fonts/*`, `must-revalidate` for HTML/CSS.
+`pnpm build` runs `vite build && tsc -b`, then `postbuild` chains two scripts:
+
+```bash
+node scripts/generate-sitemap.js && node scripts/append-html-headers.js
+```
+
+### Caching strategy
+
+- **Prerendered HTML** (`/`, `/legal/*`, `/404`): `public, max-age=0, must-revalidate`. Every navigation revalidates (cheap `304` when unchanged), so deploys show instantly instead of sitting in browser cache.
+- **Hashed JS** (`/assets/*.js`), **fonts**, **images**: 1-year `immutable`. Content hashes change on every code change, so long caching is safe.
+- **CSS** (`/assets/*.css`): `must-revalidate` — emitted without a content hash (deterministic naming avoids Client/SSR divergence), so it must revalidate like HTML.
+
+This stays highly performant: the SSG HTML files are tiny (~35–92KB) while the large TS/JS bundles keep 1-year immutable caching. Only the small shell revalidates; the heavy assets come from cache.
+
+### Why a postbuild script for HTML headers?
+
+Cloudflare Pages `_headers` rules match the **request path**, not the file on disk. A prerendered `legal/terms.html` is served at the clean URL `/legal/terms`, so a `/*.html` rule would never match what browsers actually request — each route needs its own explicit entry. Routes are only known after the SSG crawl, so `scripts/append-html-headers.js` scans `dist/client/**/*.html`, maps each file to its clean route (`index.html` → `/`, `legal/terms.html` → `/legal/terms`, `404.html` → `/404`), and appends an idempotent marked block to the built `dist/client/_headers` (the Vite copy of `public/_headers`). Never hand-edit the generated block — edit `public/_headers` or the script instead. Covered by `tests/unit/scripts/append-html-headers.test.ts`.
 
 ## Docs
 

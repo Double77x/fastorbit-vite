@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc -b",
-    "postbuild": "node scripts/generate-sitemap.js",
+    "postbuild": "node scripts/generate-sitemap.js && node scripts/append-html-headers.js",
     "build:dev": "vite build --mode development",
     "lint": "oxlint .",
     "format": "oxfmt",

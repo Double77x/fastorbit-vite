@@ -33,7 +33,7 @@ export default defineConfig(({ mode, isSsrBuild }) => {
           crawlLinks: true,
           failOnError: true,
           autoSubfolderIndex: false,
-          filter: ({ path: routePath }) => !routePath.includes("#"),
+          filter: ({ path: routePath }) => !routePath.includes("#") && !routePath.includes("?"),
         },
         pages: [{ path: "/404" }],
         // Inline critical CSS to eliminate FOUC on hard refresh:

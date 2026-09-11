@@ -1,4 +1,8 @@
 # Global security headers and cache control
+# NOTE: per-route HTML `Cache-Control` entries are appended to the BUILT copy
+# (dist/client/_headers) by scripts/append-html-headers.js during postbuild.
+# Do not list prerendered routes here — they are only known after SSG crawl.
+# See docs/ARCHITECTURE.md (SSG + caching) and docs/CODING_STANDARDS.md §19.
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff

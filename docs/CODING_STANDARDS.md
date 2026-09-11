@@ -239,6 +239,11 @@ When a feature requires a new UI element (e.g., Progress Bar, Command Menu, etc.
 - **CSP Maintenance:** Always maintain a robust Content Security Policy (CSP) to prevent XSS and data injection attacks.
 - **Balance:** Strike a balance between strict security and production stability. Avoid over-restrictive policies that break critical third-party integrations (e.g., Google Fonts, analytics, or CDN-hosted assets).
 - **Header Location:** CSP headers and other security policies are managed in `public/_headers` (for platforms like Cloudflare/Netlify).
+- **Cache-Control split (HTML vs assets):**
+  - **Prerendered HTML** (`/`, `/legal/*`, `/404`): `public, max-age=0, must-revalidate` — always revalidate so deploys show instantly. HTML shells are tiny (~35–92KB); the cost is one cheap `304` per navigation.
+  - **Hashed JS** (`/assets/*.js`), **fonts**, **images**: 1-year `immutable` — content hashes make long caching safe.
+  - **CSS** (`/assets/*.css`): `must-revalidate` — emitted without a content hash, so it revalidates like HTML.
+  - **Mechanism:** `public/_headers` holds the static rules; `scripts/append-html-headers.js` (wired into `postbuild` in `package.json`) scans `dist/client/**/*.html` after the SSG crawl and appends one explicit entry per clean route to the built `dist/client/_headers`. Pages `_headers` matches request paths, not files, so `/*.html` would never match clean URLs like `/legal/terms` — per-route entries are required. The generated block is idempotent (marked, replaced on re-run). Never hand-edit it; edit `public/_headers` or the script.
 - **Conflict Resolution:**
   - When adding a new feature that requires external resources (e.g., a new analytics tool or external API), you **MUST** audit and update the `public/_headers` file.
   - Resolve conflicts by adding the necessary domain to the relevant directive (e.g., `connect-src` or `img-src`) rather than using broad wildcards.
