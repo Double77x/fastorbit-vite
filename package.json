@@ -41,7 +41,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
     "@cloudflare/workers-types": "^5.20260901.1",
-    "@playwright/test": "^1.62.1",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/router-plugin": "^1.168.35",
     "@testing-library/jest-dom": "^7.0.1",
