@@ -116,6 +116,7 @@ When a feature requires a new UI element (e.g., Progress Bar, Command Menu, etc.
 - **Code Splitting:**
   - Leverage Lazy Loading for routes (already implemented via `.lazy.tsx` pattern).
   - Defer loading of heavy non-critical components. Anything above the fold on the homepage shouldn't be lazy loaded for user experience.
+  - Full chunking rules (vendor groups, no-barrel policy, lazy-boundary pattern, verification): see `docs/BUNDLING.md`. `vite.config.ts` is the enforcement point — read it before touching imports of heavy deps.
 - **Compression:**
   - **Do NOT pre-compress** assets with `.gz`/`.br` files. This project deploys to Cloudflare (Pages/Workers), which applies gzip/brotli compression automatically at the edge. Pre-compressed files are redundant and add build output noise.
 - **Virtualization (`@tanstack/react-virtual`):**
