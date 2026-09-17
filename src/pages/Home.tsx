@@ -1,13 +1,21 @@
+import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/landing/HeroSection";
 import FeaturesSection from "@/components/landing/FeaturesSection";
 import QuickStartSection from "@/components/landing/QuickStartSection";
 import StackSection from "@/components/landing/StackSection";
-import { WeatherSection } from "@/components/weather/WeatherSection";
+import { WeatherSectionSkeleton } from "@/components/weather/WeatherSectionSkeleton";
 import FaqSection from "@/components/landing/FaqSection";
 import ContactSection from "@/components/landing/ContactSection";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/Seo";
+
+// Below-fold heavy demo (charts + table + virtual + query libs). Lazy-split so
+// the entry stays lean and legal pages never download these libs. SSR renders
+// the skeleton fallback; the client gate inside WeatherSection then hydrates.
+const WeatherSection = lazy(() =>
+  import("@/components/weather/WeatherSection").then((m) => ({ default: m.WeatherSection })),
+);
 
 export default function HomePage() {
   const faqSchema = {
@@ -64,7 +72,9 @@ export default function HomePage() {
         <FeaturesSection />
         <QuickStartSection />
         <StackSection />
-        <WeatherSection />
+        <Suspense fallback={<WeatherSectionSkeleton />}>
+          <WeatherSection />
+        </Suspense>
         <FaqSection />
         <ContactSection />
       </main>

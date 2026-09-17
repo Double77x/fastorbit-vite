@@ -14,6 +14,7 @@ import { formatWeatherCode } from "@/lib/weather-api";
 import { LocationPicker } from "./LocationPicker";
 import { WeatherChart } from "./WeatherChart";
 import { WeatherTable } from "./WeatherTable";
+import { WeatherSectionSkeleton } from "./WeatherSectionSkeleton";
 
 const DEFAULT_LOCATION = WEATHER_LOCATIONS[0];
 
@@ -325,29 +326,7 @@ export const WeatherSection = () => {
   // oxlint-disable-next-line react/set-state-in-effect, react-hooks-js/set-state-in-effect -- client gate for prerender
   useEffect(() => setIsClient(true), []);
   if (!isClient) {
-    return (
-      <section id='weather' className='scroll-mt-24'>
-        <Grid variant='muted' topDivider>
-          <SectionHeading
-            title='Powered by'
-            accent='TanStack'
-            description='A live showcase of our architectural stack — TanStack Query for server state, TanStack Charts for visualization, TanStack Table for data grids, and TanStack Virtual for performant lists. All client-side, SSG-ready on Cloudflare Pages.'
-          />
-          <GridCell className='col-span-12'>
-            <div className='h-10 w-full max-w-md animate-pulse rounded-md bg-muted' />
-          </GridCell>
-          <GridCell className='col-span-12 lg:col-span-4'>
-            <div className='min-h-80 animate-pulse rounded-md bg-muted' />
-          </GridCell>
-          <GridCell className='col-span-12 lg:col-span-8'>
-            <div className='min-h-80 animate-pulse rounded-md bg-muted' />
-          </GridCell>
-          <GridCell className='col-span-12'>
-            <div className='min-h-70 animate-pulse rounded-md bg-muted' />
-          </GridCell>
-        </Grid>
-      </section>
-    );
+    return <WeatherSectionSkeleton />;
   }
   return <WeatherSectionInner />;
 };
